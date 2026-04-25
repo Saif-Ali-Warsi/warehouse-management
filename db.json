@@ -1,19 +1,84 @@
 {
-    "users": [
-        {
-            "id": 1,
-            "email": "admin@gmail.com",
-            "password": "admin123"
-        }
-    ],
-    "warehouses": [
-        {
-            "id": "WH001",
-            "name": "SRC Transport Comp",
-            "location": "Pune",
-            "branch": "Pune Head Office",
-            "status": "Active",
-            "contactPerson": "Ajay Kumar"
-        }
-    ]
+  "users": [
+    {
+      "id": "1",
+      "email": "admin@gmail.com",
+      "password": "admin123"
+    }
+  ],
+  "warehouses": [
+    {
+      "id": "WH001",
+      "name": "SRC Transport Comp",
+      "location": "Pune",
+      "branch": "Pune Head Office",
+      "status": "Active",
+      "contactPerson": "Ajay Kumar"
+    },
+    {
+      "id": "0syBVn1snWQ",
+      "name": "HGBJ65",
+      "location": "pune",
+      "branch": "hadapsar",
+      "status": "active",
+      "contactPerson": "saif"
+    },
+    {
+      "id": "YM1ZwZhCWjo",
+      "name": "HJNB68",
+      "location": "Nashik",
+      "branch": "DP road",
+      "status": "inactive",
+      "contactPerson": "dinesh"
+    },
+    {
+      "id": "2awhYHHV_qA",
+      "name": "JNM90",
+      "location": "Delhi",
+      "branch": "Ashok Nagar",
+      "status": "Active",
+      "contactPerson": "Ravi"
+    },
+    {
+      "id": "SmqcmWYn8Mc",
+      "name": "GBVP90",
+      "location": "Delhi",
+      "branch": "Mayur Vihar",
+      "status": "Active",
+      "contactPerson": "jogi"
+    },
+    {
+      "id": "UDQJyhbADxw",
+      "name": "MKAZ87",
+      "location": "Amritsar",
+      "branch": "Railway Colony",
+      "status": "Active",
+      "contactPerson": "Gurminder"
+    },
+    {
+      "id": "DCUfh0cxRb8",
+      "name": "GBVP90",
+      "location": "Delhi",
+      "branch": "Mayur Vihar",
+      "status": "Active",
+      "contactPerson": "jogi"
+    },
+    {
+      "id": "Ya1bX0J7lcY",
+      "name": "JNM90",
+      "location": "Delhi",
+      "branch": "Ashok Nagar",
+      "status": "Active",
+      "contactPerson": "Ravi"
+    },
+    {
+      "id": "A9X9vUhw6E8",
+      "name": "MKAZ87",
+      "location": "Amritsar",
+      "branch": "Railway Colony",
+      "status": "Active",
+      "contactPerson": "Gurminder"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

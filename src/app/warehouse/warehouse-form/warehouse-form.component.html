@@ -1,1 +1,64 @@
-<p>warehouse-form works!</p>
+<h2>{{ isEdit ? "Edit" : "Add" }} Warehouse</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="form-field">
+    <input type="text" formControlName="name" placeholder="Warehouse Name" />
+    <p
+      class="error-message"
+      *ngIf="form.controls.name.touched && form.controls.name.invalid"
+    >
+      Name is Required
+    </p>
+  </div>
+
+  <div class="form-field">
+    <input
+      type="text"
+      formControlName="location"
+      placeholder="Enter Location"
+    />
+    <p
+      class="error-message"
+      *ngIf="form.controls.location.touched && form.controls.location.invalid"
+    >
+      Location is required
+    </p>
+  </div>
+
+  <div class="form-field">
+    <input type="text" formControlName="branch" placeholder="Enter Branch" />
+    <p
+      class="error-message"
+      *ngIf="form.controls.branch.touched && form.controls.branch.invalid"
+    >
+      Branch is required
+    </p>
+  </div>
+
+  <div class="form-field">
+    <input type="text" formControlName="status" placeholder="Enter Status" />
+    <p
+      class="error-message"
+      *ngIf="form.controls.status.touched && form.controls.status.invalid"
+    ></p>
+  </div>
+
+  <div class="form-field">
+    <input
+      type="text"
+      formControlName="contactPerson"
+      placeholder="Contact Person"
+    />
+    <p
+      class="error-message"
+      *ngIf="
+        form.controls.contactPerson.touched &&
+        form.controls.contactPerson.invalid
+      "
+    >
+      Contact Person is required
+    </p>
+  </div>
+
+  <button type="submit">Save Warehouse</button>
+</form>

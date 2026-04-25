@@ -1,1 +1,32 @@
-<p>warehouse-list works!</p>
+<div class="search-field">
+  <input
+    type="text"
+    placeholder="Search warehouse..."
+    (input)="onSearch($event)"
+  />
+
+  <div class="add-warehouse-btn-container d-flex box-center">
+    <a routerLink="/warehouse/add">+ Add Warehouse</a>
+  </div>
+</div>
+
+<div class="warehouse-listing">
+  <div class="warehouse-card" *ngFor="let warehouse of warehouses">
+    <div class="card-content">
+      <h3>{{ warehouse.name }}</h3>
+
+      <p>Location: {{ warehouse.location }}</p>
+      <p>Branch: {{ warehouse.branch }}</p>
+      <p>Status: {{ warehouse.status }}</p>
+      <div class="d-flex gap-10">
+        <a class="card-btn" [routerLink]="['/warehouse', warehouse.id]">
+          View Details
+        </a>
+        <a class="card-btn" [routerLink]="['/warehouse/edit', warehouse.id]"
+          >Edit</a
+        >
+        <a class="card-btn" (click)="deleteWarehouse(warehouse.id)">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>

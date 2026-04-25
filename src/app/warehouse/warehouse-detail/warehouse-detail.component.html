@@ -1,1 +1,26 @@
-<p>warehouse-detail works!</p>
+<div *ngIf="warehouse">
+  <h3>{{ warehouse.name }}</h3>
+
+  <p>
+    <strong>Location:</strong>
+    {{ warehouse.location }}
+  </p>
+  <p>
+    <strong>Branch:</strong>
+    {{ warehouse.branch }}
+  </p>
+
+  <p>
+    <strong>Status:</strong>
+    {{ warehouse.status }}
+  </p>
+
+  <p>
+    <strong>Contact Person</strong>
+    {{ warehouse.contactPerson }}
+  </p>
+
+  <br />
+
+  <a routerLink="/warehouses">Back to List</a>
+</div>
