@@ -1,1 +1,72 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  letter-spacing: 0.3px;
+  box-sizing: border-box;
+  color: #00ffff;
+  background-color: #262e2e;
+}
+
+input {
+  font-size: 14px;
+  color: #00ffff;
+  padding: 8px 10px;
+  background-color: unset;
+  border: 1px solid #00ffff;
+}
+
+button {
+  font-size: 15px;
+  font-weight: 500;
+  color: #00ffff;
+  background: unset;
+  padding: 8px 10px;
+  border: 1px solid #00ffff;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  li {
+    list-style-type: none;
+  }
+}
+
+a {
+  all: unset;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-center {
+  align-items: center;
+}
+
+.gap-15 {
+  gap: 15px;
+}
+
+.gap-10 {
+  gap: 10px;
+}
+
+.gap-5 {
+  gap: 5px;
+}
+
+.box-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.form-field {
+  margin: 0 0 15px;
+}
+
+.error-message {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ff6363;
+}
