@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { AuthService } from './core/services/auth.service';
+import { LoaderService } from './core/services/loader.service';
+
 
 @Component({
   selector: 'app-root',
@@ -13,7 +15,7 @@ import { AuthService } from './core/services/auth.service';
 export class AppComponent {
 
 
-  constructor(public authService: AuthService, private router: Router) {
+  constructor(public authService: AuthService, private router: Router, public loader: LoaderService) {
 
   }
 

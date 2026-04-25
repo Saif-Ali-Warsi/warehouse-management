@@ -1,3 +1,7 @@
+<div class="loading-state" *ngIf="loader.loading$ | async">
+  <span>Loading...</span>
+</div>
+
 <ul class="navigation d-flex d-center gap-10">
   <li>
     <a class="link" routerLink="/warehouses">warehouses</a>

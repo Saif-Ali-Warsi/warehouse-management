@@ -78,6 +78,14 @@
       "branch": "Railway Colony",
       "status": "Active",
       "contactPerson": "Gurminder"
+    },
+    {
+      "id": "dGJ9G2m7N2E",
+      "name": "NUOP90",
+      "location": "Gujrat",
+      "branch": "Ahmdabad",
+      "status": "Inactive",
+      "contactPerson": "Suraj"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
