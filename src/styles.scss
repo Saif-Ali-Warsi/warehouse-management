@@ -1,7 +1,10 @@
 body {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
   letter-spacing: 0.3px;
   box-sizing: border-box;
-  color: #00ffff;
+  color: #ffffff;
   background-color: #262e2e;
 }
 
@@ -68,6 +71,6 @@ a {
 
 .error-message {
   font-size: 0.875rem;
-  font-weight: 600;
-  color: #ff6363;
+  font-weight: 500;
+  color: #ff8b8b;
 }

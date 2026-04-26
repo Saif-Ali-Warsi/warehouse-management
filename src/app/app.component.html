@@ -2,23 +2,25 @@
   <span>Loading...</span>
 </div>
 
-<ul class="navigation d-flex d-center gap-10">
-  <li>
-    <a class="link" routerLink="/warehouses">warehouses</a>
-  </li>
-  <li>
-    <a class="link" routerLink="/warehouse/add">Add Warehouses</a>
-  </li>
-  <li>
-    <a class="link" *ngIf="!authService.isLoggedIn()" routerLink="/login"
-      >Login</a
-    >
-  </li>
-  <li>
-    <a class="link" *ngIf="authService.isLoggedIn()" (click)="logout()"
-      >Logout</a
-    >
-  </li>
-</ul>
+<nav class="navigation-container">
+  <div>
+    <ul class="d-flex d-center gap-10">
+      <li *ngIf="authService.isLoggedIn()">
+        <a class="link" routerLink="/warehouses">Warehouses</a>
+      </li>
+      <li *ngIf="authService.isLoggedIn()">
+        <a class="link" routerLink="/warehouse/add">Add Warehouses</a>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <ul>
+      <li *ngIf="authService.isLoggedIn()">
+        <a class="logout-link" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
 <router-outlet></router-outlet>

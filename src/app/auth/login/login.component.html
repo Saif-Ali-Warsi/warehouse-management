@@ -2,29 +2,21 @@
 
 <form [formGroup]="form" (ngSubmit)="login()">
   <div class="form-field">
-    <input type="email" formControlName="email" placeholder="Enter email" />
-
-    <p
-      class="error-message"
-      *ngIf="form.controls.email.touched && form.controls.email.invalid"
-    >
-      Email is required
-    </p>
+    <app-form-input
+      placeholder="Enter email"
+      type="email"
+      [control]="form.controls.email"
+      errorMessage="Valid email is required"
+    ></app-form-input>
   </div>
 
   <div class="form-field">
-    <input
-      type="password"
-      formControlName="password"
+    <app-form-input
       placeholder="Enter password"
-    />
-
-    <p
-      class="error-message"
-      *ngIf="form.controls.password.touched && form.controls.password.invalid"
-    >
-      Password is required
-    </p>
+      type="password"
+      [control]="form.controls.password"
+      errorMessage="Password is required"
+    ></app-form-input>
   </div>
 
   <button type="submit">Login</button>
@@ -33,7 +25,5 @@
     {{ error }}
   </div>
 </form>
-
-<hr />
 
 <a routerLink="/signup">New user? Signup here</a>

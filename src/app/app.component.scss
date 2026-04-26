@@ -1,10 +1,26 @@
-.navigation {
-  margin: 0 0 20px;
+.navigation-container {
+  display: flex;
+  justify-content: space-between;
+  ul li {
+    margin: 0 0 30px;
+  }
 }
 
 .link {
   cursor: pointer;
   border-bottom: 1px solid #00ffff;
+}
+
+.logged-in-link {
+  cursor: pointer;
+  color: #0fcf1f;
+  border-bottom: 1px solid #0fcf1f;
+}
+
+.logout-link {
+  cursor: pointer;
+  color: #ff4c4c;
+  border-bottom: 1px solid #ff4c4c;
 }
 
 .loading-state {
