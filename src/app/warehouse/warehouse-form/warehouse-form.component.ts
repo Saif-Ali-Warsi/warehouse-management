@@ -53,7 +53,7 @@ export class WarehouseFormComponent implements OnInit {
     const formValue = this.form.value;
 
     const warehouseData: Warehouse = {
-      id: Date.now().toString(),
+      id: this.isEdit ? this.warehouseId : Date.now().toString(),
       name: formValue.name || '',
       location: formValue.location || '',
       branch: formValue.branch || '',

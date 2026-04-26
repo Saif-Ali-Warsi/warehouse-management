@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { AuthService } from './core/services/auth.service';
 import { LoaderService } from './core/services/loader.service';
@@ -12,13 +12,19 @@ import { LoaderService } from './core/services/loader.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
 
 
-  constructor(public authService: AuthService, private router: Router, public loader: LoaderService) {
+  constructor(public authService: AuthService,
+    private router: Router,
+    public loader: LoaderService,
+    private cdRef: ChangeDetectorRef
+  ) {
 
   }
-
+  ngAfterViewInit() {
+    this.cdRef.detectChanges();
+  }
 
   logout() {
     this.authService.logout();

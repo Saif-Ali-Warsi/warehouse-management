@@ -5,21 +5,26 @@ import { Warehouse } from '../../core/models/warehouse.model';
 import { RouterLink } from '@angular/router';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs/operators';
+import { LoaderService } from '../../core/services/loader.service';
+import { ConfirmModalComponent } from "../../shared/components/confirm-modal/confirm-modal.component";
 
 @Component({
   selector: 'app-warehouse-list',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, ConfirmModalComponent],
   templateUrl: './warehouse-list.component.html',
   styleUrl: './warehouse-list.component.scss'
 })
 export class WarehouseListComponent implements OnInit {
 
+  showDeleteModal = false;
+  selectedWarehouseId = '';
+
   warehouses: Warehouse[] = [];
 
   search$ = new Subject<string>();
 
-  constructor(private warehouseService: WarehouseService) { }
+  constructor(private warehouseService: WarehouseService, public loader: LoaderService) { }
 
 
   ngOnInit() {
@@ -58,12 +63,23 @@ export class WarehouseListComponent implements OnInit {
 
 
   deleteWarehouse(id: string) {
-    const confirmDelete = confirm('Are you sure you want to delete this warehouse?')
+    this.selectedWarehouseId = id;
+    this.showDeleteModal = true;
+  }
 
-    if (confirmDelete) {
-      this.warehouseService.deleteWarehouse(id).subscribe(() => {
-        this.loadWarehouses();
-      })
-    }
+  confirmDelete() {
+    this.warehouseService.deleteWarehouse(this.selectedWarehouseId).subscribe(() => {
+      this.loadWarehouses();
+      this.closeModal();
+    })
+  }
+
+  closeModal() {
+    this.showDeleteModal = false;
+    this.selectedWarehouseId = '';
+  }
+
+  trackByWarehouseId(index: number, warehouse: Warehouse): string {
+    return warehouse.id
   }
 }

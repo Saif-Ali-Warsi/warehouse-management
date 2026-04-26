@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -6,20 +8,51 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   private tokenKey = 'auth_token';
+  private baseUrl = 'http://localhost:3000/users';
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
+  login(email: string, password: string) {
+    return this.http.get<any[]>(this.baseUrl).pipe(
+      map((users) => {
+        console.log('All Users:', users);
 
-  login(email: string, password: string): boolean {
-    if (
-      email === 'saif@gmail.com' && password === 'saif123'
-    ) {
-      const token = 'fake-jwt-token';
+        const matchedUser = users.find(
+          user =>
+            user.email === email &&
+            user.password === password
+        );
 
-      localStorage.setItem(this.tokenKey, token);
-      return true;
-    }
-    return false;
+        if (matchedUser) {
+          const token = 'fake-jwt-token';
+
+          localStorage.setItem(
+            this.tokenKey,
+            token
+          );
+
+          return true;
+        }
+
+        return false;
+      })
+    );
+  }
+
+  checkEmailExists(email: string) {
+    return this.http.get<any[]>(this.baseUrl).pipe(
+      map((users) => {
+        return users.some(
+          user => user.email === email
+        )
+      })
+    )
+  }
+
+  signup(userData: { id: number; email: string; password: string }) {
+    return this.http.post(this.baseUrl, userData);
   }
 
   logout() {
@@ -33,5 +66,4 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
-
 }

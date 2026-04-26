@@ -4,6 +4,26 @@
       "id": "1",
       "email": "admin@gmail.com",
       "password": "admin123"
+    },
+    {
+      "id": "HYB4Zsiz8-Q",
+      "email": "jack@hotmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "ftjnsfjfZSU",
+      "email": "mark@google.com",
+      "password": "123456"
+    },
+    {
+      "id": "nT_yQuFgisg",
+      "email": "sunny@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "IeJbwbgp2fM",
+      "email": "newadmin@gmail.com",
+      "password": "admin123"
     }
   ],
   "warehouses": [
@@ -70,22 +90,6 @@
       "branch": "Ashok Nagar",
       "status": "Active",
       "contactPerson": "Ravi"
-    },
-    {
-      "id": "A9X9vUhw6E8",
-      "name": "MKAZ87",
-      "location": "Amritsar",
-      "branch": "Railway Colony",
-      "status": "Active",
-      "contactPerson": "Gurminder"
-    },
-    {
-      "id": "dGJ9G2m7N2E",
-      "name": "NUOP90",
-      "location": "Gujrat",
-      "branch": "Ahmdabad",
-      "status": "Inactive",
-      "contactPerson": "Suraj"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

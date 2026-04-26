@@ -11,7 +11,10 @@
 </div>
 
 <div class="warehouse-listing">
-  <div class="warehouse-card" *ngFor="let warehouse of warehouses">
+  <div
+    class="warehouse-card"
+    *ngFor="let warehouse of warehouses; trackBy: trackByWarehouseId"
+  >
     <div class="card-content">
       <h3>{{ warehouse.name }}</h3>
 
@@ -29,4 +32,19 @@
       </div>
     </div>
   </div>
+
+  <app-confirm-modal
+    [isVisible]="showDeleteModal"
+    message="Are you sure you want to delete this warehouse?"
+    (confirm)="confirmDelete()"
+    (cancel)="closeModal()"
+  >
+  </app-confirm-modal>
+
+  <p
+    class="empty-state"
+    *ngIf="!(loader.loading$ | async) && warehouses.length === 0"
+  >
+    No Warehouses Found
+  </p>
 </div>

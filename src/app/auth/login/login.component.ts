@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 
 
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -42,16 +42,18 @@ export class LoginComponent {
 
     const { email, password } = this.form.value;
 
-    const success = this.authService.login(
+    this.authService.login(
       email || '',
       password || ''
-    );
+    ).subscribe((success) => {
+      if (success) {
+        this.router.navigate(['/warehouses']);
+      } else {
+        this.error = 'Invalid credentials'
+      }
+    })
 
-    if (success) {
-      this.router.navigate(['/warehouses']);
-    } else {
-      this.error = 'Invalid credentials'
-    }
+
   }
 
 }
