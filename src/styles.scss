@@ -12,6 +12,7 @@ input {
   font-size: 14px;
   color: #00ffff;
   padding: 8px 10px;
+  width: calc(100% - 20px);
   background-color: unset;
   border: 1px solid #00ffff;
   border-radius: 4px;
@@ -60,13 +61,17 @@ a {
   gap: 5px;
 }
 
+.mx-500 {
+  max-width: 500px;
+}
+
 .box-center {
   align-items: center;
   justify-content: center;
 }
 
 .form-field {
-  margin: 0 0 15px;
+  margin: 0 0 20px;
 }
 
 .error-message {

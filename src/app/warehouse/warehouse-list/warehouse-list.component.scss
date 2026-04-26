@@ -42,3 +42,14 @@
   padding: 5px 8px;
   border: 1px solid aqua;
 }
+
+@media screen and (max-width: 640px) {
+  .warehouse-card {
+    width: calc(100%);
+  }
+  .search-field {
+    .add-warehouse-btn-container {
+      min-width: 40%;
+    }
+  }
+}

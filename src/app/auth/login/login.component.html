@@ -1,29 +1,33 @@
-<h2>Login</h2>
+<div class="main-container">
+  <h2>Login</h2>
 
-<form [formGroup]="form" (ngSubmit)="login()">
-  <div class="form-field">
-    <app-form-input
-      placeholder="Enter email"
-      type="email"
-      [control]="form.controls.email"
-      errorMessage="Valid email is required"
-    ></app-form-input>
-  </div>
+  <form [formGroup]="form" (ngSubmit)="login()">
+    <div class="form-field">
+      <app-form-input
+        placeholder="Enter email"
+        type="email"
+        [control]="form.controls.email"
+        errorMessage="Valid email is required"
+      ></app-form-input>
+    </div>
 
-  <div class="form-field">
-    <app-form-input
-      placeholder="Enter password"
-      type="password"
-      [control]="form.controls.password"
-      errorMessage="Password is required"
-    ></app-form-input>
-  </div>
+    <div class="form-field">
+      <app-form-input
+        placeholder="Enter password"
+        type="password"
+        [control]="form.controls.password"
+        errorMessage="Password is required"
+      ></app-form-input>
+    </div>
 
-  <button type="submit">Login</button>
+    <button type="submit">Login</button>
 
-  <div class="error-message" *ngIf="error">
-    {{ error }}
-  </div>
-</form>
+    <div class="error-message" *ngIf="error">
+      {{ error }}
+    </div>
+  </form>
 
-<a routerLink="/signup">New user? Signup here</a>
+  <a routerLink="/signup"
+    >New user? <span class="sign-up-text"> Signup here</span>
+  </a>
+</div>

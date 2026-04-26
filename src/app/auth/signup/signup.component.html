@@ -1,29 +1,37 @@
-<h2>Signup</h2>
+<div class="main-container">
+  <h2>Signup</h2>
 
-<form [formGroup]="form" (ngSubmit)="signup()">
-  <div class="form-field">
-    <input type="text" formControlName="email" placeholder="Enter your email" />
-    <p
-      class="error-message"
-      *ngIf="form.controls.email.touched && form.controls.email.invalid"
-    >
-      Email is required
-    </p>
-  </div>
+  <form [formGroup]="form" (ngSubmit)="signup()">
+    <div class="form-field">
+      <input
+        type="text"
+        formControlName="email"
+        placeholder="Enter your email"
+      />
+      <p
+        class="error-message"
+        *ngIf="form.controls.email.touched && form.controls.email.invalid"
+      >
+        Email is required
+      </p>
+    </div>
 
-  <div class="form-field">
-    <input type="text" formControlName="password" placeholder="Password" />
-    <p
-      class="error-message"
-      *ngIf="form.controls.password.touched && form.controls.password.invalid"
-    >
-      Password is required
-    </p>
-  </div>
+    <div class="form-field">
+      <input type="text" formControlName="password" placeholder="Password" />
+      <p
+        class="error-message"
+        *ngIf="form.controls.password.touched && form.controls.password.invalid"
+      >
+        Password is required
+      </p>
+    </div>
 
-  <button type="submit">Signup</button>
+    <button type="submit">Signup</button>
 
-  <p class="error-message" *ngIf="error">{{ error }}</p>
-</form>
+    <p class="error-message" *ngIf="error">{{ error }}</p>
+  </form>
 
-<a routerLink="/login">Already have account? Login</a>
+  <a routerLink="/login"
+    >Already have account? <span class="login-text"> Login</span>
+  </a>
+</div>
