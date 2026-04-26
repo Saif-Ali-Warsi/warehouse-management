@@ -12,6 +12,7 @@ input {
   font-size: 14px;
   color: #00ffff;
   padding: 8px 10px;
+  height: 35px;
   width: calc(100% - 20px);
   background-color: unset;
   border: 1px solid #00ffff;
@@ -24,6 +25,8 @@ button {
   color: #00ffff;
   background: unset;
   padding: 8px 10px;
+  height: 45px;
+  min-width: 100px;
   border: 1px solid #00ffff;
 }
 
