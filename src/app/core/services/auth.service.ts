@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { map } from 'rxjs/operators';
 export class AuthService {
 
   private tokenKey = 'auth_token';
-  private baseUrl = 'http://localhost:3000/users';
+  private baseUrl = `${environment.apiUrl}/users`;
 
   constructor(
     private http: HttpClient
