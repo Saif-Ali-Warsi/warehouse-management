@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validator, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WarehouseService } from '../../core/services/warehouse.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Warehouse } from '../../core/models/warehouse.model';
+import { Subject } from 'rxjs';
+import { exhaustMap } from 'rxjs/operators';
 
 
 @Component({
@@ -17,6 +19,7 @@ export class WarehouseFormComponent implements OnInit {
 
   isEdit = false;
   warehouseId!: string;
+  submit$ = new Subject<void>();
 
 
   form = new FormGroup({
@@ -42,6 +45,41 @@ export class WarehouseFormComponent implements OnInit {
         this.form.patchValue(warehouse)
       })
     }
+
+
+    this.submit$
+      .pipe(
+        exhaustMap(() => {
+          const formValue = this.form.value;
+
+          const warehouseData: Warehouse = {
+            id: this.isEdit
+              ? this.warehouseId
+              : Date.now().toString(),
+
+            name: formValue.name || '',
+            location: formValue.location || '',
+            branch: formValue.branch || '',
+            status: formValue.status || '',
+            contactPerson: formValue.contactPerson || ''
+          };
+
+          if (this.isEdit) {
+            return this.warehouseService.updateWarehouse(
+              this.warehouseId,
+              warehouseData
+            );
+          }
+
+          return this.warehouseService.addWarehouse(
+            warehouseData
+          );
+        })
+      )
+      .subscribe(() => {
+        this.router.navigate(['/warehouses']);
+      });
+
   }
 
   submit() {
@@ -49,27 +87,7 @@ export class WarehouseFormComponent implements OnInit {
       this.form.markAllAsTouched();
       return
     }
-
-    const formValue = this.form.value;
-
-    const warehouseData: Warehouse = {
-      id: this.isEdit ? this.warehouseId : Date.now().toString(),
-      name: formValue.name || '',
-      location: formValue.location || '',
-      branch: formValue.branch || '',
-      status: formValue.status || '',
-      contactPerson: formValue.contactPerson || ''
-    };
-
-    if (this.isEdit) {
-      this.warehouseService.updateWarehouse(this.warehouseId, warehouseData).subscribe(() => {
-        this.router.navigate(['/warehouses']);
-      });
-    } else {
-      this.warehouseService.addWarehouse(warehouseData).subscribe(() => {
-        this.router.navigate(['/warehouses']);
-      })
-    }
+    this.submit$.next();
   }
 
 
