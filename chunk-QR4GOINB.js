@@ -1,0 +1,1 @@
+import{d as r,x as o}from"./chunk-SMYLVKQX.js";var c=(()=>{class t{constructor(){this.message$=new r("")}show(e){this.message$.next(e),setTimeout(()=>this.clear(),3e3)}clear(){this.message$.next("")}static{this.\u0275fac=function(s){return new(s||t)}}static{this.\u0275prov=o({token:t,factory:t.\u0275fac,providedIn:"root"})}}return t})();export{c as a};
