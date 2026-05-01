@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Warehouse } from '../models/warehouse.model';
 import { environment } from '../../../environments/environment';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,10 @@ export class WarehouseService {
 
   deleteWarehouse(id: string) {
     return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+
+  logActivity(data: any) {
+    console.log('Activity Logged:', data);
+    return of(true);
   }
 }

@@ -5,7 +5,7 @@ import { WarehouseService } from '../../core/services/warehouse.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Warehouse } from '../../core/models/warehouse.model';
 import { Subject } from 'rxjs';
-import { exhaustMap } from 'rxjs/operators';
+import { concatMap, exhaustMap } from 'rxjs/operators';
 
 
 @Component({
@@ -64,16 +64,22 @@ export class WarehouseFormComponent implements OnInit {
             contactPerson: formValue.contactPerson || ''
           };
 
-          if (this.isEdit) {
-            return this.warehouseService.updateWarehouse(
-              this.warehouseId,
-              warehouseData
-            );
-          }
 
-          return this.warehouseService.addWarehouse(
-            warehouseData
-          );
+          const apiCall = this.isEdit
+            ? this.warehouseService.updateWarehouse(this.warehouseId, warehouseData)
+            : this.warehouseService.addWarehouse(warehouseData);
+
+          return apiCall.pipe(
+            concatMap(() => {
+              console.log('Warehouse API completed');
+              return this.warehouseService.logActivity({
+                action: this.isEdit ? 'UPDATE' : 'CREATE',
+                warehouseName: warehouseData.name
+              })
+            })
+          )
+
+
         })
       )
       .subscribe(() => {
