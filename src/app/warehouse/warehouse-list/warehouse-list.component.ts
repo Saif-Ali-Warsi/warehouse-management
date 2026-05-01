@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { WarehouseService } from '../../core/services/warehouse.service';
 import { Warehouse } from '../../core/models/warehouse.model';
 import { RouterLink } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, interval } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, map, takeUntil } from 'rxjs/operators';
 import { LoaderService } from '../../core/services/loader.service';
 import { ConfirmModalComponent } from "../../shared/components/confirm-modal/confirm-modal.component";
@@ -31,6 +31,10 @@ export class WarehouseListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loadWarehouses();
+
+    interval(1500).pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.shuffleWarehouses();
+    })
 
     this.search$.pipe(
       debounceTime(300),
@@ -81,9 +85,23 @@ export class WarehouseListComponent implements OnInit, OnDestroy {
     this.selectedWarehouseId = '';
   }
 
+  shuffleWarehouses() {
+    const shuffled = [...this.warehouses];
+
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+    }
+
+    this.warehouses = shuffled;
+  }
+
   trackByWarehouseId(index: number, warehouse: Warehouse): string {
     return warehouse.id
   }
+
+
 
   ngOnDestroy() {
     this.destroy$.next();
