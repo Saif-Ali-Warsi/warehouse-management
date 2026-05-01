@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Warehouse } from '../models/warehouse.model';
 import { environment } from '../../../environments/environment';
 import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +39,14 @@ export class WarehouseService {
   logActivity(data: any) {
     console.log('Activity Logged:', data);
     return of(true);
+  }
+
+  uploadFile(file: File) {
+    console.log('Uploading:', file.name);
+
+    return of({
+      fileName: file.name,
+      url: 'fake-url/' + file.name
+    }).pipe(delay(1000));
   }
 }

@@ -4,8 +4,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { WarehouseService } from '../../core/services/warehouse.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Warehouse } from '../../core/models/warehouse.model';
-import { Subject } from 'rxjs';
-import { concatMap, exhaustMap } from 'rxjs/operators';
+import { Subject, from } from 'rxjs';
+import { concatMap, exhaustMap, mergeMap, toArray } from 'rxjs/operators';
 
 
 @Component({
@@ -20,6 +20,8 @@ export class WarehouseFormComponent implements OnInit {
   isEdit = false;
   warehouseId!: string;
   submit$ = new Subject<void>();
+
+  selectedFiles: File[] = [];
 
 
   form = new FormGroup({
@@ -76,6 +78,17 @@ export class WarehouseFormComponent implements OnInit {
                 action: this.isEdit ? 'UPDATE' : 'CREATE',
                 warehouseName: warehouseData.name
               })
+            }),
+            concatMap(() => {
+              if (!this.selectedFiles.length) {
+                return from([null]);
+              }
+              return from(this.selectedFiles).pipe(
+                mergeMap((file) => {
+                  return this.warehouseService.uploadFile(file);
+                }),
+                toArray()
+              )
             })
           )
 
@@ -86,6 +99,10 @@ export class WarehouseFormComponent implements OnInit {
         this.router.navigate(['/warehouses']);
       });
 
+  }
+
+  onFilesSelected(event: any) {
+    this.selectedFiles = Array.from(event.target.files);
   }
 
   submit() {
