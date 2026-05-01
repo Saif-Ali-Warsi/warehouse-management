@@ -10,10 +10,21 @@
   <div>
     <ul class="d-flex d-center gap-10">
       <li *ngIf="authService.isLoggedIn()">
-        <a class="link" routerLink="/warehouses">Warehouses</a>
+        <a
+          class="link"
+          routerLink="/warehouses"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Warehouses</a
+        >
       </li>
       <li *ngIf="authService.isLoggedIn()">
-        <a class="link" routerLink="/warehouse/add">Add Warehouses</a>
+        <a
+          class="link"
+          routerLink="/warehouse/add"
+          routerLinkActive="active-link"
+          >Add Warehouses</a
+        >
       </li>
     </ul>
   </div>

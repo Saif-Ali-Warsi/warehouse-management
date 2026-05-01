@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { RouterOutlet, RouterLink, Router } from '@angular/router';
+import { RouterOutlet, RouterLink, Router, RouterLinkActive } from '@angular/router';
 import { AuthService } from './core/services/auth.service';
 import { LoaderService } from './core/services/loader.service';
 import { ToastService } from './core/services/toast.service';
@@ -9,7 +9,7 @@ import { ToastService } from './core/services/toast.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
