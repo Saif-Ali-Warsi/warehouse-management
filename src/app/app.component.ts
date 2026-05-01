@@ -3,6 +3,7 @@ import { Component, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { AuthService } from './core/services/auth.service';
 import { LoaderService } from './core/services/loader.service';
+import { ToastService } from './core/services/toast.service';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class AppComponent implements AfterViewInit {
   constructor(public authService: AuthService,
     private router: Router,
     public loader: LoaderService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    public toast: ToastService
   ) {
 
   }

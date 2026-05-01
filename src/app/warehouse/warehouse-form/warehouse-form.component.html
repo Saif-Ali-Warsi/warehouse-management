@@ -64,5 +64,7 @@
     <input type="file" multiple (change)="onFilesSelected($event)" />
   </div>
 
-  <button type="submit">Save Warehouse</button>
+  <button type="submit" [disabled]="isSubmitting || form.invalid">
+    {{ isSubmitting ? "Saving..." : "Save Warehouse" }}
+  </button>
 </form>

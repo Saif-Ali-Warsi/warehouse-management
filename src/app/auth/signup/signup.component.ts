@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { ToastService } from '../../core/services/toast.service';
 
 @Component({
   selector: 'app-signup',
@@ -21,7 +22,7 @@ export class SignupComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
   })
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private toast: ToastService) { }
 
   signup() {
     if (this.form.invalid) {
@@ -46,7 +47,7 @@ export class SignupComponent {
 
 
       this.authService.signup(userData).subscribe(() => {
-        alert('Signup successful');
+        this.toast.show('Signup Successful');
         this.router.navigate(['/login'])
       })
 

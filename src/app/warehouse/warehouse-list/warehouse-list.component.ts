@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WarehouseService } from '../../core/services/warehouse.service';
 import { Warehouse } from '../../core/models/warehouse.model';
 import { RouterLink } from '@angular/router';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap, map, takeUntil } from 'rxjs/operators';
 import { LoaderService } from '../../core/services/loader.service';
 import { ConfirmModalComponent } from "../../shared/components/confirm-modal/confirm-modal.component";
 
@@ -15,7 +15,7 @@ import { ConfirmModalComponent } from "../../shared/components/confirm-modal/con
   templateUrl: './warehouse-list.component.html',
   styleUrl: './warehouse-list.component.scss'
 })
-export class WarehouseListComponent implements OnInit {
+export class WarehouseListComponent implements OnInit, OnDestroy {
 
   showDeleteModal = false;
   selectedWarehouseId = '';
@@ -23,6 +23,8 @@ export class WarehouseListComponent implements OnInit {
   warehouses: Warehouse[] = [];
 
   search$ = new Subject<string>();
+
+  private destroy$ = new Subject<void>();
 
   constructor(private warehouseService: WarehouseService, public loader: LoaderService) { }
 
@@ -41,7 +43,8 @@ export class WarehouseListComponent implements OnInit {
             }
 
             return warehouses.filter(w => w.name.toLowerCase().includes(searchTerm.toLowerCase()))
-          })
+          }),
+          takeUntil(this.destroy$)
         )
       })
     ).subscribe((data) => {
@@ -56,10 +59,9 @@ export class WarehouseListComponent implements OnInit {
 
 
   loadWarehouses() {
-    this.warehouseService.getWarehouses().subscribe((data => {
-      this.warehouses = data;
-    }))
+    this.warehouseService.getWarehouses().pipe(takeUntil(this.destroy$)).subscribe(data => this.warehouses = data);
   }
+
 
 
   deleteWarehouse(id: string) {
@@ -82,4 +84,11 @@ export class WarehouseListComponent implements OnInit {
   trackByWarehouseId(index: number, warehouse: Warehouse): string {
     return warehouse.id
   }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class AuthService {
   ) { }
 
   login(email: string, password: string) {
-    return this.http.get<any[]>(this.baseUrl).pipe(
+    return this.http.get<User[]>(this.baseUrl).pipe(
       map((users) => {
         console.log('All Users:', users);
 
@@ -43,7 +44,7 @@ export class AuthService {
   }
 
   checkEmailExists(email: string) {
-    return this.http.get<any[]>(this.baseUrl).pipe(
+    return this.http.get<User[]>(this.baseUrl).pipe(
       map((users) => {
         return users.some(
           user => user.email === email

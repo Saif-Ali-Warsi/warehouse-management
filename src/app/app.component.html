@@ -1,3 +1,7 @@
+<div class="toast" *ngIf="toast.message$ | async as msg">
+  <span *ngIf="msg">{{ msg }}</span>
+</div>
+
 <div class="loading-state" *ngIf="loader.loading$ | async">
   <span>Loading...</span>
 </div>

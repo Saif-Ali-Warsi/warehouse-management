@@ -5,7 +5,7 @@ import { WarehouseService } from '../../core/services/warehouse.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Warehouse } from '../../core/models/warehouse.model';
 import { Subject, from } from 'rxjs';
-import { concatMap, exhaustMap, mergeMap, toArray } from 'rxjs/operators';
+import { concatMap, exhaustMap, finalize, mergeMap, toArray } from 'rxjs/operators';
 
 
 @Component({
@@ -22,6 +22,8 @@ export class WarehouseFormComponent implements OnInit {
   submit$ = new Subject<void>();
 
   selectedFiles: File[] = [];
+
+  isSubmitting = false;
 
 
   form = new FormGroup({
@@ -52,6 +54,8 @@ export class WarehouseFormComponent implements OnInit {
     this.submit$
       .pipe(
         exhaustMap(() => {
+          this.isSubmitting = true;
+
           const formValue = this.form.value;
 
           const warehouseData: Warehouse = {
@@ -89,7 +93,8 @@ export class WarehouseFormComponent implements OnInit {
                 }),
                 toArray()
               )
-            })
+            }),
+            finalize(() => this.isSubmitting = false)
           )
 
 
